@@ -48,10 +48,10 @@ def register(request):
 def myself(request):
     # userprofile = UserProfile.objects.get(user=request.user)
     userprofile = UserProfile.objects.get(user=request.user) if hasattr(request.user,
-                                                                         'userprofile') else UserProfile.objects.create(
+    'userprofile') else UserProfile.objects.create(
         user=request.user)
     userinfo = UserInfo.objects.get(user=request.user) if hasattr(request.user,
-                                                                  'userinfo') else UserInfo.objects.create(
+    'userinfo') else UserInfo.objects.create(
         user=request.user)
 
 
