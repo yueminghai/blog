@@ -125,3 +125,12 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/blog/'
+LOGIN_URL = '/account/login'
+# AUTH_PROFILE_MODULE = 'account.UserProfile'
+
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = "yueminghai6@163.com"
+EMAIL_HOST_PASSWORD = "RZTPSRDCERRQJMPR"
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "yueminghai6@163.com"

@@ -12,7 +12,14 @@
     {% endif %}
     <p>Input your username and password</p>
 
+    {% if next %}
+
+    <form class="form-horizontal" action="{% url 'account:user_login' %}? next={{next}}" method="post">
+
+    {% else %}
     <form class="form-horizontal" action="{% url 'account:user_login' %}" method="post">
+
+    {% endif %}
         {% csrf_token %}
 <!--        {{ form.as_p }}-->
         <div class="form-group">
