@@ -129,8 +129,8 @@ LOGIN_URL = '/account/login'
 # AUTH_PROFILE_MODULE = 'account.UserProfile'
 
 EMAIL_HOST = 'smtp.163.com'
-EMAIL_HOST_USER = "yueminghai6@163.com"
-EMAIL_HOST_PASSWORD = "RZTPSRDCERRQJMPR"
+EMAIL_HOST_USER = "******@163.com"
+EMAIL_HOST_PASSWORD = "*******"
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "yueminghai6@163.com"
+DEFAULT_FROM_EMAIL = "****@163.com"
