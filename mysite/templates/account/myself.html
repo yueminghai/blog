@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}my information {% endblock %}
 {% block content %}
+{% load static %}
 
 <div class="row text-center vertical-middle-sm">
     <h1> My Information </h1>
@@ -30,7 +31,7 @@
                     <span>生日：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.birth }}
+                    {{ userprofile.birth }}
                 </div>
             </div>
 
@@ -40,7 +41,7 @@
                     <span>电话：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.phone }}
+                    {{ userprofile.phone }}
                 </div>
             </div>
 
@@ -49,7 +50,7 @@
                     <span>毕业学校：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.school }}
+                    {{ userinfo.school }}
                 </div>
             </div>
 
@@ -58,7 +59,7 @@
                     <span>工作单位：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.company }}
+                    {{ userinfo.company }}
                 </div>
             </div>
 
@@ -67,7 +68,7 @@
                     <span>职业：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.profession }}
+                    {{ userinfo.profession }}
                 </div>
             </div>
 
@@ -76,7 +77,7 @@
                     <span>地址：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.address }}
+                    {{ userinfo.address }}
                 </div>
             </div>
 
@@ -85,14 +86,38 @@
                     <span>个人介绍：</span>
                 </div>
                 <div class="col-md-8 text-left">
-                    {{ user.aboutme }}
+                    {{ userinfo.aboutme }}
                 </div>
             </div>
+            <a href="{% url 'account:edit-my-information' %}">
+                <button class="btn btn-primary btn-lg">edit my information</button>
+            </a>
+
         </div>
 
         <div class="col-md-6">
-            <p>picture</p>
+            <div style="margin-right: 100px">
+<!--                {% if userinfo.photo %}-->
+<!--                <img src="{{ userinfo.photo | striptags }}"-->
+<!--                     class="img-circle" id="my_photo" name="user_face" >-->
+<!--                {% else %}-->
+<!--                <img src="{% static 'images/maodou.jpeg' %}"-->
+<!--                     class="img-circle" id="my_photo" name="user_face" >-->
+<!--                {% endif %}-->
+
+                <img src="{% static 'images/maodou.jpeg' %}"
+                     class="img-circle" id="my_photo"  width="270px" name="user_face" >
+            </div>
+            <div style="margin-right: 100px">
+                <button class="btn btn-primary btn-lg" id="upload_image"
+                    onclick="upload_image_layer()">
+                    Upload my photo
+                </button>
+
+            </div>
         </div>
+
+
     </div>
 
 </div>
