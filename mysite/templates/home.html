@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h1>Welcome YOU!</h1>
+    <h3>Life is short. You need Python</h3>
+    {% load static %}
+    <img src="{% static 'images/maodou.jpeg' %}"  width="200px" alt="">
+</div>
+{% endblock %}
