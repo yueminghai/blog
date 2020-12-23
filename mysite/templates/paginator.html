@@ -1,0 +1,23 @@
+<div class="pagination">
+     <span class="step-links">
+         {% if page.has_previous %}
+         <a href="?page={{ page.previous_page_number }}">Previous</a>
+         {% endif %}
+
+
+     <span class="current">
+         Page {{ page.number }} of {{ page.paginator.num_pages }}
+     </span>
+
+        {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}">Next</a>
+        {% endif %}
+     </span>
+</div>
+
+<!--在上述代码中，使用了Page对象的几个属性。-->
+<!--has_previous：判断是否有上一页。·-->
+<!--previous_page_number：返回上一页的页码。·-->
+<!--number：返回当前页的页码-->
+<!--paginator.num_pages：关联Paginator对象（page.paginator），并得到其总页码数（paginator.num_pages）。-->
+<!--next_page_number：返回下一页的页码-->

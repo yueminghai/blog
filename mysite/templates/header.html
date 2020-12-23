@@ -37,6 +37,7 @@
 
 <!--                <li><a href="#">{{ user.username}}</a></li>-->
                 <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+
                 {% else %}
                 <li><a href="{% url 'account:user_login' %}">LOGIN</a></li>
                 {% endif %}

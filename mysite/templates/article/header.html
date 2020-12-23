@@ -13,9 +13,10 @@
                 <li><a href="{% url 'article:article_column' %}">后台管理</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
-                <li><a href="{% url 'blog:blog_title' %}"></a>网站首页</li>
+
+                <li><a href="{% url 'blog:blog_title' %}">网站首页</a></li>
                 <li><span>{{ user.username }}</span></li>
-                <li><a href="{% url 'account:user_logout' %}"></a>Logout</li>
+                <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
             </ul>
         </div>
     </nav>
