@@ -2,21 +2,71 @@
 {% load static %}
 {% block title %}articles list{% endblock %}
 {% block content %}
+{% with total_likes=article.users_like.count users_like=article.users_like.all %}
 <div class="container">
+    <div class="col-md-9">
     <header>
     <h1>{{ article.title }}</h1>
-    <p>{{ article.author.username }}</p>
+        <p><a href="{% url 'article:author_articles' article.author.username %}">{{ article.author.username }}</a></p>
+
+        <span style="margin-left: 20px" class="glyphicon glyphicon-thumbs-up">
+            {{ total_likes }} like {{ total_likes | pluralize }}
+        </span>
+        <span>
+            {{ total_views }} view {{ total_views | pluralize }}
+        </span>
 
     </header>
     <link rel="stylesheet" href="{% static 'editor/css/editormd.preview.css' %}"/>
 
-    <div id="editormd-view">
-        <textarea id="append-test" style="display: none;">
-            {{ article.body }}
-        </textarea>
+
+        <div id="editormd-view">
+            <textarea id="append-test" style="display: none;">
+                {{ article.body }}
+            </textarea>
+        </div>
+
+        <div>
+            <p class="text-center">
+                <a onclick="like_article({{article.id}},'like')" href="#">
+                    <span class="glyphicon glyphicon-thumbs-up">
+                        like
+                    </span>
+                </a>
+                <a onclick="like_article({{article.id}}, 'unlike')" href="#">
+                    <span style="margin-left: 15px" class="glyphicon glyphicon-thumbs-up">
+                        unlike
+                    </span>
+                </a>
+            </p>
+        </div>
+
+        <div>
+            <p class="text-center">
+                <strong>点赞本文的读者</strong>
+            </p>
+            {% for user in article.users_like.all %}
+            <p class="text-center">{{ user.username }}</p>
+            {% empty %}
+            <p class="text-center">还没有人对此文章表态</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+    <div class="col-md-3">
+        <p class="text-center"><h3>最受欢迎文章</h3></p>
+        <ol>
+            {% for article_rank in most_viewed %}
+            <li>
+                <a href="{{ article_rank.get_url_path }}">
+                    {{ article_rank.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ol>
     </div>
 </div>
-
 
 <script  src='{% static "js/jquery-1.11.1.min.js" %}'></script>
 <script  src='{% static "editor/lib/marked.min.js" %}'></script>
@@ -27,7 +77,7 @@
 <script  src='{% static "editor/lib/flowchart.min.js" %}'></script>
 <script  src='{% static "editor/lib/jquery.flowchart.min.js" %}'></script>
 <script  src='{% static "editor/editormd.js" %}'></script>
-
+<script  src="{% static 'js/layer.js' %}"></script>
 
 <script type="text/javascript">
     $(function (){
@@ -41,7 +91,23 @@
 
         });
     });
+    function like_article(id, action){
+        $.ajax({
+            url: "{% url 'article:like_article' %}",
+            type: "POST",
+            data: {"id":id, "action": action},
+            success: function(e){
+                if(e=="1"){
+                    layer.msg("感谢点赞");
+                    window.location.reload();
+                }else {
+                    layer.msg("我会继续努力");
+                    window.location.reload();
+                }
+            },
+        });
+    }
 </script>
 
-
+{% endwith %}
 {% endblock %}
