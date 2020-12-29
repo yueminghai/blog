@@ -1,5 +1,6 @@
 {% extends "article/base.html" %}
 {% load static %}
+{% load article_tags %}
 {% block title %}articles list{% endblock %}
 {% block content %}
 {% with total_likes=article.users_like.count users_like=article.users_like.all %}
@@ -52,6 +53,42 @@
             {% endfor %}
 
         </div>
+        <hr>
+        <div>
+            <h3>
+                <span class="glyphicon glyphicon-bullhorn">
+                    </span>本文有{{ article.comments.count }}评论
+            </h3>
+            {% for comment in article.comments.all %}
+            <div>
+                <p><strong>评论员:{{ comment.commentator }}</strong></p>
+                <p style="margin-left: 40px; ">{{ comment.body }}</p>
+            </div>
+            {% empty %}
+            <p>没有评论</p>
+            {% endfor %}
+            <h3><span class="glyphicon glyphicon-send">看文章，发评论，不要沉默</span></h3>
+            <form action="." method="post" class="form-horizontal" role="form">
+                {% csrf_token%}
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">评论员</label>
+                    <div class="col-sm-10">
+                        {{ comment_form.commentator }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">评论</label>
+                    <div class="col-sm-10">
+                        {{ comment_form.body }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <p><input type="submit" name="" value="发评论" class="btn btn-primary"></p>
+                    </div>
+                </div>
+            </form>
+        </div>
 
     </div>
     <div class="col-md-3">
@@ -65,6 +102,28 @@
             </li>
             {% endfor %}
         </ol>
+
+        <hr>
+        <p class="text-center">
+            <h3>最新文章</h3>
+        </p>
+
+        {% latest_articles 4 %}
+
+        <hr>
+        <p class="text-center">
+            <h3>最多评论文章</h3>
+        {% most_commented_articles as most_comments %}
+        <ul>
+            {% for comment_article in most_comments %}
+            <li>
+                <a href="{{ comment_article.get_url_path }}">
+                    {{ comment_article.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        </p>
     </div>
 </div>
 

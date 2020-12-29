@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load article_tags %}
 {% block title %} articles {% endblock %}
 {% block content %}
 
@@ -39,6 +40,7 @@
         </div>
         <div>
             <p>{{ user.username }}</p>
+            <p>共发表文章{% author_total_articles user %}篇</p>
             {% if userinfo %}
             <p>{{ userinfo.company }}</p>
             <p>{{ userinfo.aboutme }}</p>
