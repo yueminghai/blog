@@ -8,3 +8,6 @@ python3 manager.py migrate
 python3 manage.py  runserver 0:9999
 
 访问  http://127.0.0.1:9999 即可
+有任何疑问可联系作者
+email:yueminghai6@163.com
+个人blog留言:http://www.yueminghai.top
