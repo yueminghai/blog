@@ -3,6 +3,7 @@
     1.配置数据库IP、password、port
     2.redis配置
 
+pip3 install markdown 
 python3 manager.py makemigrations
 python3 manager.py migrate 
 python3 manage.py  runserver 0:9999

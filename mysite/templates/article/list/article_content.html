@@ -1,6 +1,6 @@
 {% extends "article/base.html" %}
 {% load static %}
-{% load article_tags %}
+<!--{% load article_tags %}-->
 {% block title %}articles list{% endblock %}
 {% block content %}
 {% with total_likes=article.users_like.count users_like=article.users_like.all %}
@@ -17,13 +17,14 @@
             {{ total_views }} view {{ total_views | pluralize }}
         </span>
 
+
     </header>
     <link rel="stylesheet" href="{% static 'editor/css/editormd.preview.css' %}"/>
 
 
         <div id="editormd-view">
             <textarea id="append-test" style="display: none;">
-                {{ article.body }}
+                {{ article.body | markdown }}
             </textarea>
         </div>
 
@@ -43,6 +44,10 @@
         </div>
 
         <div>
+            <p>
+                <span style="margin-right: 10px"><strong>Tags:</strong></span>
+                {{ article.article_tag.all | join:", "}}
+            </p>
             <p class="text-center">
                 <strong>点赞本文的读者</strong>
             </p>
@@ -51,6 +56,7 @@
             {% empty %}
             <p class="text-center">还没有人对此文章表态</p>
             {% endfor %}
+
 
         </div>
         <hr>
@@ -123,6 +129,16 @@
             </li>
             {% endfor %}
         </ul>
+        </p>
+
+        <hr>
+        <p class="text-center">
+            <h3>推荐相似文章</h3>
+        {% for similar in similar_articles %}
+        <p><a href="{{ similar.get_url_path }}">{{ similar.title }}</a></p>
+        {% empty %}
+        <p>Sorry, 没有相似文章</p>
+        {% endfor %}
         </p>
     </div>
 </div>
